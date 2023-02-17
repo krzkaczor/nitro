@@ -6,6 +6,7 @@ package staker
 import (
 	"context"
 	"encoding/binary"
+	"encoding/json"
 	"fmt"
 	"math/big"
 
@@ -115,6 +116,9 @@ func (r *RollupWatcher) LookupNode(ctx context.Context, number uint64) (*NodeInf
 		Addresses: []common.Address{r.address},
 		Topics:    [][]common.Hash{{nodeCreatedID}, {numberAsHash}},
 	}
+	queryJson, _ := json.Marshal(query)
+	fmt.Println("Logging query")
+	fmt.Println(string(queryJson))
 	logs, err := r.client.FilterLogs(ctx, query)
 	if err != nil {
 		return nil, errors.WithStack(err)
