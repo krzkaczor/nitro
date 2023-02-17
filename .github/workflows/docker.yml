@@ -52,16 +52,7 @@ jobs:
           tags: localhost:5000/nitro-node:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
-
-      - name: Build nitro-node-dev docker
-        uses: docker/build-push-action@v2
-        with:
-          target: nitro-node-dev
-          push: true
-          context: .
-          tags: krzkaczor/mynitro:latest
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
+          platform:  linux/x86_6
 
       - name: Print WAVM module root
         id: module-root
